@@ -1,6 +1,7 @@
 import streamlit as st
-import mediapipe as mp
+import cv2
 
-st.title('MediaPipe Test')
+# Display "Hello, World!" in the Streamlit app
+st.title('Hello, World!')
 
-st.write('MediaPipe version:', mp.__version__)
+st.write('This is a simple Streamlit app.')
