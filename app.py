@@ -2,7 +2,7 @@ import streamlit as st
 import mediapipe as mp
 import numpy as np
 from PIL import Image
-import av
+#import av
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
 # Initialize MediaPipe Hands.
