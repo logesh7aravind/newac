@@ -1,8 +1,6 @@
 import streamlit as st
-import cv2
-import mediapipe as mp
 
-st.title('Test OpenCV and MediaPipe')
+# Display "Hello, World!" in the Streamlit app
+st.title('Hello, World!')
 
-st.write('OpenCV version:', cv2.__version__)
-st.write('MediaPipe version:', mp.__version__)
+st.write('This is a simple Streamlit app.')
