@@ -12,7 +12,9 @@ class VideoTransformer(VideoTransformerBase):
         img = frame.to_ndarray(format="bgr24")
         gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
         self.frame = gray_img  # Store the grayscale frame to capture it later
-        return av.VideoFrame.from_ndarray(gray_img, format="gray")  # Use "gray" format
+        # Convert the single-channel grayscale image back to BGR to ensure compatibility
+        display_img = cv2.cvtColor(gray_img, cv2.COLOR_GRAY2BGR)
+        return av.VideoFrame.from_ndarray(display_img, format="bgr24")  # Display as BGR
 
 def main():
     st.title("Webcam Live Stream with Capture Button")
