@@ -16,8 +16,14 @@ class VideoTransformer(VideoTransformerBase):
 def main():
     st.title("Webcam Live Stream with Capture Button")
 
-    # Initialize the video transformer
-    ctx = webrtc_streamer(key="example", video_transformer_factory=VideoTransformer)
+    # Initialize the video transformer with STUN server configuration
+    ctx = webrtc_streamer(
+        key="example",
+        video_transformer_factory=VideoTransformer,
+        rtc_configuration={
+            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+        }
+    )
 
     if ctx.video_transformer:
         # Capture button
