@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import cv2
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
+from streamlit_webrtc import webrtc_streamer, VideoProcessorBase
 import mediapipe as mp
 import av
 
@@ -13,11 +13,11 @@ face_detection = mp_face_detection.FaceDetection()
 necklace_image_path = 'necklace_1.png'
 necklace_image = cv2.imread(necklace_image_path, cv2.IMREAD_UNCHANGED)
 
-class VideoTransformer(VideoTransformerBase):
+class VideoProcessor(VideoProcessorBase):
     def __init__(self):
         self.frame = None
 
-    def transform(self, frame):
+    def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
         try:
             img = frame.to_ndarray(format="bgr24")
             center_section = img  # Assuming the whole frame is the center section
@@ -93,7 +93,7 @@ st.markdown("This app detects faces and overlays a necklace image on the detecte
 st.write("Webcam Feed:")
 webrtc_ctx = webrtc_streamer(
     key="example",
-    video_transformer_factory=VideoTransformer,
+    video_processor_factory=VideoProcessor,
     rtc_configuration={
         "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
     },
