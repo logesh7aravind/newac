@@ -11,8 +11,11 @@ class VideoTransformer(VideoTransformerBase):
     def transform(self, frame):
         img = frame.to_ndarray(format="bgr24")
         
-        # Draw a blue vertical line in the center of the frame
+        # Debugging: Check the frame dimensions
         height, width, _ = img.shape
+        st.write(f"Frame dimensions: {width}x{height}")
+        
+        # Draw a blue vertical line in the center of the frame
         line_color = (255, 0, 0)  # Blue color in BGR
         line_thickness = 2
         cv2.line(img, (width // 2, 0), (width // 2, height), line_color, line_thickness)
